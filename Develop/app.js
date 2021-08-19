@@ -22,6 +22,114 @@ const employees = [];
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
+function createManager() {
+  inquirer
+    .prompt([
+      {
+        message: "Whats is the name of the new manager",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "manager Office number",
+        type: "input",
+        name: "officeNumber",
+      },
+      {
+        message: " manager id number",
+        type: "input",
+        name: "idNumber",
+      },
+      {
+        message: "whats your email",
+        type: "input",
+        name: "email",
+      },
+    ])
+    .then((answers) => {
+      const manager = new Manager(
+        answers.name,
+        answers.idNumber,
+        answers.email,
+        answers.officeNumber
+      );
+      employees.push(manager);
+      //  call next function
+
+      createEngineer()
+      createIntern()
+    });
+}
+
+function createEngineer() {
+  inquirer
+    .prompt([
+      {
+        message: "Whats is the name of the new Engineer",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "Engineer Office number",
+        type: "input",
+        name: "officeNumber",
+      },
+      {
+        message: "New Engineer id number",
+        type: "input",
+        name: "idNumber",
+      },
+      {
+        message: "whats the new Engineer email",
+        type: "input",
+        name: "email",
+      },
+    ])
+    .then((answers) => {
+      const Engineer = new Engineer(
+        answers.name,
+        answers.idNumber,
+        answers.email,
+        answers.officeNumber
+      );
+      employees.push(Engineer);
+    });
+}
+
+function createIntern() {
+  inquirer
+    .prompt([
+      {
+        message: "Whats is the name of the new Intern",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "Intern Office number (if any)",
+        type: "input",
+        name: "officeNumber",
+      },
+      {
+        message: "New Intern id number",
+        type: "input",
+        name: "idNumber",
+      },
+      {
+        message: "whats the new Intern email",
+        type: "input",
+        name: "email",
+      },
+    ])
+    .then((answers) => {
+      const Intern = new Intern(
+        answers.name,
+        answers.idNumber,
+        answers.email,
+        answers.officeNumber
+      );
+      employees.push(Intern);
+    });
+}
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
