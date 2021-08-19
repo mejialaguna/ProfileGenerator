@@ -22,6 +22,25 @@ const employees = [];
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
+
+function createEmployee(employeeType) {
+  inquirer.prompt([
+    {
+      message: "select new hire",
+      type: "checkbox",
+      name: "employeeType",
+      choices: ["Manager", "Engineer", "Intern"],
+    },
+  ]);
+  if (employeeType === "Manager") {
+    return createManager();
+  } else if (employeeType === "Engineer") {
+    return createEngineer();
+  } else if (employeeType=== "Intern") {
+    return createIntern()
+  }
+}
+
 function createManager() {
   inquirer
     .prompt([
@@ -45,7 +64,14 @@ function createManager() {
         type: "input",
         name: "email",
       },
+      {
+        message: "would you like to add another Employee",
+        type: "confirm",
+        name: "confirmEmployee",
+        default: false,
+      },
     ])
+
     .then((answers) => {
       const manager = new Manager(
         answers.name,
@@ -54,13 +80,13 @@ function createManager() {
         answers.officeNumber
       );
       employees.push(manager);
-      //  call next function
-
-      createEngineer()
-      createIntern()
+      if (answers.confirmEmployee) {
+        return createManager(answers);
+      } else {
+        return employees;
+      }
     });
 }
-
 function createEngineer() {
   inquirer
     .prompt([
@@ -131,6 +157,19 @@ function createIntern() {
     });
 }
 
+function init() {
+    inquirer.prompt(createEmployee)
+    .then (answers => {
+        writeToFile("", createEmployee(answers))
+        console.log('created');
+    } )
+    .catch( err => {
+      console.log(err);
+    })
+         
+}
+
+init()
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
