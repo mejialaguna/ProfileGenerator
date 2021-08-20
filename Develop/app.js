@@ -23,22 +23,25 @@ const employees = [];
 // employee type.
 
 
-function createEmployee(employeeType) {
+function createEmployee() {
   inquirer.prompt([
     {
       message: "select new hire",
-      type: "checkbox",
+      type: "list",
       name: "employeeType",
-      choices: ["Manager", "Engineer", "Intern"],
-    },
-  ]);
-  if (employeeType === "Manager") {
-    return createManager();
-  } else if (employeeType === "Engineer") {
-    return createEngineer();
-  } else if (employeeType=== "Intern") {
-    return createIntern()
-  }
+      choices: ["Manager", "Engineer", "Intern"]
+    }    
+  ])
+  .then( data => { 
+    // console.log(data);
+    if (data.employeeType === "Manager") {
+      return createManager();
+    } else if (data.employeeType === "Engineer") {
+      return createEngineer();
+    } else if (data.employeeType === "Intern") {
+      return createIntern()
+    }
+  })
 }
 
 function createManager() {
@@ -66,25 +69,31 @@ function createManager() {
       },
       {
         message: "would you like to add another Employee",
-        type: "confirm",
+        type: "list",
         name: "confirmEmployee",
-        default: false,
-      },
+        choices: ["Manager" , "Engineer" , "Intern"],
+      }
     ])
 
-    .then((answers) => {
+    .then((data) => {
       const manager = new Manager(
-        answers.name,
-        answers.idNumber,
-        answers.email,
-        answers.officeNumber
+        data.name,
+        data.idNumber,
+        data.email,
+        data.officeNumber
       );
       employees.push(manager);
-      if (answers.confirmEmployee) {
-        return createManager(answers);
-      } else {
-        return employees;
+
+      if(data.confirmEmployee === "Manager") {
+        return createManager()
+      } else if(data.confirmEmployee === "Engineer"){
+        return createEngineer()
+      } else if(data.confirmEmployee === "Intern"){
+        return createIntern()
+      } else if(data.confirmEmployee === "exit"){
+        return generateHtml()
       }
+      
     });
 }
 function createEngineer() {
@@ -106,22 +115,43 @@ function createEngineer() {
         name: "idNumber",
       },
       {
-        message: "whats the new Engineer email",
+        message: "whats the Engineer email",
         type: "input",
         name: "email",
       },
+      {
+        message: "Github username",
+        type: "input",
+        name: "gitHubName"
+      },
+      {
+        message: "would you like to add another Employee",
+        type: "list",
+        name: "confirmEmployee",
+        choices: ["Manager" , "Engineer" , "Intern" , "exit"]
+      }
     ])
-    .then((answers) => {
+    .then((data) => {
       const Engineer = new Engineer(
-        answers.name,
-        answers.idNumber,
-        answers.email,
-        answers.officeNumber
+        data.name,
+        data.idNumber,
+        data.email,
+        data.officeNumber,
+        data.gitHubName
       );
       employees.push(Engineer);
+
+      if(data.confirmEmployee === "Manager"){
+        return createManager()
+      }else if( data.confirmEmployee === "Engineer"){
+        return createEngineer()
+      } else if(data.confirmEmployee === "Intern"){    
+        return createIntern()
+      } else if(data.confirmEmployee === "exit"){
+        return generateHtml()
+      }
     });
 }
-
 function createIntern() {
   inquirer
     .prompt([
@@ -145,31 +175,61 @@ function createIntern() {
         type: "input",
         name: "email",
       },
+      {
+        message: "would you like to add another Employee",
+        type: "list",
+        name: "confirmEmployee",
+        choices: ["Manager" , "Engineer" , "Intern" , "exit"]
+      }
     ])
-    .then((answers) => {
+    .then((data) => {
       const Intern = new Intern(
-        answers.name,
-        answers.idNumber,
-        answers.email,
-        answers.officeNumber
+        data.name,
+        data.idNumber,
+        data.email,
+        data.officeNumber
       );
       employees.push(Intern);
+
+      if(data.confirmEmployee === "Manager"){
+        return createManager()
+      }else if( data.confirmEmployee === "Engineer"){
+        return createEngineer()
+      } else if(data.confirmEmployee === "Intern"){    
+        return createIntern()
+      } else if(data.confirmEmployee === "exit"){
+        return generateHtml()
+      }
     });
 }
 
+
+
+
+function generateHtml(){
+  if(data.confirmEmployee === "Manager"){
+     return fs.writeFileSync(path.join(__dirname, "./Develop/templates/manager.html"),  (fileName , data))
+  } else if(data.confirmEmployee === "Engineer"){
+    return fs.writeFileSync(path.join(__dirname, "./Develop/templates/engineer.html"),  (fileName , data))
+  } else if(data.confirmEmployee === "intern"){
+    return fs.writeFileSync(path.join(__dirname, "./Develop/templates/intern.html"),  (fileName , data))
+  }
+}
+
+
 function init() {
-    inquirer.prompt(createEmployee)
-    .then (answers => {
-        writeToFile("", createEmployee(answers))
-        console.log('created');
-    } )
+    createEmployee()
+    // .then (data => {
+    //     generateHtml(data)
+    //     console.log('created');
+    // } )
     .catch( err => {
       console.log(err);
     })
          
 }
 
-init()
+init();
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
