@@ -11,71 +11,60 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const employees = [];
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
 
 
 function createEmployee() {
   inquirer.prompt([
     {
-      message: "select new hire",
+      message: "Whats is the name of the new Employee",
+      type: "input",
+      name: "name",
+    },
+    {
+      message: "Employee ID Number",
+      type: "input",
+      name: "id",
+    },
+    {
+      message: "whats the Employee email",
+      type: "input",
+      name: "email",
+    },
+    {
+      message: "what will be the Employee Role",
       type: "list",
-      name: "employeeType",
-      choices: ["Manager", "Engineer", "Intern"]
-    }    
+      name: "role",
+      choices: ["Manager", "Engineer", "intern"]
+    }
   ])
   .then( data => { 
-    // console.log(data);
-    if (data.employeeType === "Manager") {
-      return createManager();
-    } else if (data.employeeType === "Engineer") {
-      return createEngineer();
-    } else if (data.employeeType === "Intern") {
-      return createIntern()
+    console.log(data);
+    if (data.role === "Manager") {
+      manager();
+    } else if (data.role === "Engineer") {
+      engineer();
+    } else  {
+      intern()
     }
   })
 }
-
-function createManager() {
+function manager() {
   inquirer
-    .prompt([
-      {
-        message: "Whats is the name of the new manager",
-        type: "input",
-        name: "name",
-      },
+    .prompt([      
       {
         message: "manager Office number",
         type: "input",
         name: "officeNumber",
-      },
-      {
-        message: " manager id number",
-        type: "input",
-        name: "idNumber",
-      },
-      {
-        message: "whats your email",
-        type: "input",
-        name: "email",
-      },
+      },    
       {
         message: "would you like to add another Employee",
-        type: "list",
-        name: "confirmEmployee",
-        choices: ["Manager" , "Engineer" , "Intern"],
+        type: "confirm",
+        name: "confirmEmployee" 
       }
     ])
 
     .then((data) => {
+      console.log(data)
       const manager = new Manager(
         data.name,
         data.idNumber,
@@ -84,160 +73,83 @@ function createManager() {
       );
       employees.push(manager);
 
-      if(data.confirmEmployee === "Manager") {
-        return createManager()
-      } else if(data.confirmEmployee === "Engineer"){
-        return createEngineer()
-      } else if(data.confirmEmployee === "Intern"){
-        return createIntern()
-      } else if(data.confirmEmployee === "exit"){
-        return generateHtml()
-      }
-      
-    });
+      if(data.confirmEmployee === true) {
+        createEmployee();      
+    } else{
+        createMember()
+    }
+  });
 }
-function createEngineer() {
+function engineer() {
   inquirer
-    .prompt([
-      {
-        message: "Whats is the name of the new Engineer",
-        type: "input",
-        name: "name",
-      },
-      {
-        message: "Engineer Office number",
-        type: "input",
-        name: "officeNumber",
-      },
-      {
-        message: "New Engineer id number",
-        type: "input",
-        name: "idNumber",
-      },
-      {
-        message: "whats the Engineer email",
-        type: "input",
-        name: "email",
-      },
+    .prompt([     
       {
         message: "Github username",
         type: "input",
-        name: "gitHubName"
+        name: "github",
       },
       {
         message: "would you like to add another Employee",
-        type: "list",
+        type: "confirm",
         name: "confirmEmployee",
-        choices: ["Manager" , "Engineer" , "Intern" , "exit"]
       }
     ])
     .then((data) => {
-      const Engineer = new Engineer(
+      console.log(data)
+      const engineer = new Engineer(
         data.name,
-        data.idNumber,
+        data.id,
         data.email,
-        data.officeNumber,
-        data.gitHubName
+        data.gitHub
       );
-      employees.push(Engineer);
+      employees.push(engineer);
 
-      if(data.confirmEmployee === "Manager"){
-        return createManager()
-      }else if( data.confirmEmployee === "Engineer"){
-        return createEngineer()
-      } else if(data.confirmEmployee === "Intern"){    
-        return createIntern()
-      } else if(data.confirmEmployee === "exit"){
-        return generateHtml()
+      if(data.confirmEmployee === true){
+        createEmployee()
+      } else {
+        createMember()
       }
     });
 }
-function createIntern() {
+function intern() {
   inquirer
-    .prompt([
+    .prompt([      
       {
-        message: "Whats is the name of the new Intern",
+        message: "Where did the Intern went to school",
         type: "input",
-        name: "name",
-      },
-      {
-        message: "Intern Office number (if any)",
-        type: "input",
-        name: "officeNumber",
-      },
-      {
-        message: "New Intern id number",
-        type: "input",
-        name: "idNumber",
-      },
-      {
-        message: "whats the new Intern email",
-        type: "input",
-        name: "email",
+        name: "school"
       },
       {
         message: "would you like to add another Employee",
-        type: "list",
-        name: "confirmEmployee",
-        choices: ["Manager" , "Engineer" , "Intern" , "exit"]
+        type: "confirm",
+        name: "confirmEmployee"
       }
     ])
     .then((data) => {
-      const Intern = new Intern(
+      console.log(data)
+      const intern = new Intern(
         data.name,
         data.idNumber,
         data.email,
         data.officeNumber
       );
-      employees.push(Intern);
+      employees.push(intern);
 
-      if(data.confirmEmployee === "Manager"){
-        return createManager()
-      }else if( data.confirmEmployee === "Engineer"){
-        return createEngineer()
-      } else if(data.confirmEmployee === "Intern"){    
-        return createIntern()
-      } else if(data.confirmEmployee === "exit"){
-        return generateHtml()
+      if(data.confirmEmployee === true){
+        createEmployee()
+      } else {
+        createMember()
       }
     });
 }
-
-
-
-
-function generateHtml(){
-  if(data.confirmEmployee === "Manager"){
-     return fs.writeFileSync(path.join(__dirname, "./Develop/templates/manager.html"),  (fileName , data))
-  } else if(data.confirmEmployee === "Engineer"){
-    return fs.writeFileSync(path.join(__dirname, "./Develop/templates/engineer.html"),  (fileName , data))
-  } else if(data.confirmEmployee === "intern"){
-    return fs.writeFileSync(path.join(__dirname, "./Develop/templates/intern.html"),  (fileName , data))
+function createMember() {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR)
   }
+  fs.writeFileSync(outputPath, render(employees), "utf-8");
+  
+  console.log("created")
 }
 
+createEmployee()
 
-function init() {
-    createEmployee()
-    // .then (data => {
-    //     generateHtml(data)
-    //     console.log('created');
-    // } )
-    .catch( err => {
-      console.log(err);
-    })
-         
-}
-
-init();
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
