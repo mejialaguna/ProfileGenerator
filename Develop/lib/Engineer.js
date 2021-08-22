@@ -7,19 +7,19 @@ const Employee = require("./Employee");
 //  a class that is a child of another class , his class should inherit from Employee.
 
 class Engineer extends Employee {
-  constructor(name, id, email, github) {
+  constructor(name, id, email, gitHub) {
     // When we call super(name), it passes the name argument to the
     // constructor() of the Character class, where name and other
     // properties like health are officially defined. Afterwards,
     // the Player class will add any additional properties like this.inventory to the object.
     super(name, id, email);
-    this.github = github;
-  }
-  getRole() {
-    return "Engineer";
+    this.gitHub = gitHub;
   }
   getGithub() {
     return this.gitHub;
+  }
+  getRole() {
+    return "Engineer";
   }
 }
 

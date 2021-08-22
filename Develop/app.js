@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+// const Employee = require("./lib/Employee.js")
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -14,22 +15,7 @@ const employees = [];
 
 
 function createEmployee() {
-  inquirer.prompt([
-    {
-      message: "Whats is the name of the new Employee",
-      type: "input",
-      name: "name",
-    },
-    {
-      message: "Employee ID Number",
-      type: "input",
-      name: "id",
-    },
-    {
-      message: "whats the Employee email",
-      type: "input",
-      name: "email",
-    },
+  inquirer.prompt([    
     {
       message: "what will be the Employee Role",
       type: "list",
@@ -50,7 +36,22 @@ function createEmployee() {
 }
 function manager() {
   inquirer
-    .prompt([      
+    .prompt([  
+      {
+        message: "Whats is the name of the new Employee",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "Employee ID Number",
+        type: "input",
+        name: "id",
+      },
+      {
+        message: "whats the Employee email",
+        type: "input",
+        name: "email",
+      },    
       {
         message: "manager Office number",
         type: "input",
@@ -67,7 +68,7 @@ function manager() {
       console.log(data)
       const manager = new Manager(
         data.name,
-        data.idNumber,
+        data.id,
         data.email,
         data.officeNumber
       );
@@ -82,11 +83,26 @@ function manager() {
 }
 function engineer() {
   inquirer
-    .prompt([     
+    .prompt([    
+      {
+        message: "Whats is the name of the new Employee",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "Employee ID Number",
+        type: "input",
+        name: "id",
+      },
+      {
+        message: "whats the Employee email",
+        type: "input",
+        name: "email",
+      }, 
       {
         message: "Github username",
         type: "input",
-        name: "github",
+        name: "gitHub",
       },
       {
         message: "would you like to add another Employee",
@@ -113,7 +129,22 @@ function engineer() {
 }
 function intern() {
   inquirer
-    .prompt([      
+    .prompt([  
+      {
+        message: "Whats is the name of the new Employee",
+        type: "input",
+        name: "name",
+      },
+      {
+        message: "Employee ID Number",
+        type: "input",
+        name: "id",
+      },
+      {
+        message: "whats the Employee email",
+        type: "input",
+        name: "email",
+      },    
       {
         message: "Where did the Intern went to school",
         type: "input",
@@ -129,9 +160,9 @@ function intern() {
       console.log(data)
       const intern = new Intern(
         data.name,
-        data.idNumber,
+        data.id,
         data.email,
-        data.officeNumber
+        data.school      
       );
       employees.push(intern);
 
@@ -143,9 +174,8 @@ function intern() {
     });
 }
 function createMember() {
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR)
-  }
+  fs.existsSync(OUTPUT_DIR) || fs.mkdirSync(OUTPUT_DIR)
+  
   fs.writeFileSync(outputPath, render(employees), "utf-8");
   
   console.log("created")
