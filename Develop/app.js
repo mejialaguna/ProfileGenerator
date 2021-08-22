@@ -58,10 +58,13 @@ function manager() {
         validate: (nameInput) => {
           // to make sure its a Number and no letters
           if (isNaN(nameInput)) {
-            console.log("NO LETTERS , please add NUMBERS");
+            console.log("    NO LETTERS , please provide the correct number");
+            return false;
+          } else if (!nameInput){
+            console.log("please provide a EMPLOYEE ID NUMBER");
             return false;
           } else {
-            return true;
+            return true
           }
         },
       },
@@ -70,15 +73,13 @@ function manager() {
         type: "input",
         name: "email",
         validate: (email) => {
-          if (email) {
-            // Regex mail check (return true if valid mail)
-            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-              email
-            );
-          } else {
+          if (!email) {
             console.log("please add a valid email");
-            return false;
-          }
+            return false;            
+          } else  {
+              // Regex mail check (return true if valid mail)
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+          }          
         }
       },
       {
@@ -86,30 +87,21 @@ function manager() {
         type: "input",
         name: "officeNumber",
         validate: (nameInput) => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log(
-              "please having a name its very important , please add one"
-            );
+          if (isNaN(nameInput)) {
+            console.log("   office phone does not have letters!!!!!   please anter the proper numbers")
             return false;
+          } else if (!nameInput) {
+            console.log("please add the OFFICE NUMBER");
+            return false;
+          } else{
+            return true
           }
         },
       },
       {
         message: "would you like to add another Employee",
         type: "confirm",
-        name: "confirmEmployee",
-        validate: (nameInput) => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log(
-              "please having a name its very important , please add one"
-            );
-            return false;
-          }
-        },
+        name: "confirmEmployee"
       },
     ])
 
@@ -137,21 +129,58 @@ function engineer() {
         message: "Whats is the name of the new Employee",
         type: "input",
         name: "name",
+        validate: nameInput => {
+          if(nameInput){
+            return true;
+          } else{
+            console.log("knowing the name of your employees is very important , please provide one")
+            return false
+          }
+        }
       },
       {
         message: "Employee ID Number",
         type: "input",
         name: "id",
+        validate: nameInput => {
+        if (isNaN(nameInput)){
+          console.log("  Please provide a number with no letters")
+          return false;
+        } else if (!nameInput) {
+          console.log("please provide a EMPLOYEE ID")
+          return false;
+        } else{
+          return true;
+        }
+        }
       },
       {
         message: "whats the Employee email",
         type: "input",
         name: "email",
+        validate: (email) => {
+          if (!email) {
+            console.log("please add a valid email");
+            return false;            
+          } else  {
+              // Regex mail check (return true if valid mail)
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+          }          
+        }
       },
       {
         message: "Github username",
         type: "input",
         name: "gitHub",
+        validate: (email) => {
+          if (!email) {
+            console.log("please add a valid email");
+            return false;            
+          } else  {
+              // Regex mail check (return true if valid mail)
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+          }          
+        }
       },
       {
         message: "would you like to add another Employee",
@@ -183,21 +212,57 @@ function intern() {
         message: "Whats is the name of the new Employee",
         type: "input",
         name: "name",
+        validate: nameInput => {
+          if(!nameInput){
+            console.log("knowing your EMPLOYEES NAME if very important")
+            return false;
+          } else {
+            return true;
+          }
+        }
       },
       {
         message: "Employee ID Number",
         type: "input",
         name: "id",
+        validate: nameInput => {
+          if (isNaN(nameInput)){
+            console.log("  Please provide a real ID number!!!!! with no letters")
+            return false;
+          } else if (!nameInput) {
+            console.log("please provide a EMPLOYEE ID")
+            return false;
+          } else{
+            return true;
+          }
+          }
       },
       {
         message: "whats the Employee email",
         type: "input",
         name: "email",
+        validate: (email) => {
+          if (!email) {
+            console.log("please add a valid email");
+            return false;            
+          } else  {
+              // Regex mail check (return true if valid mail)
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+          }          
+        }
       },
       {
         message: "Where did the Intern went to school",
         type: "input",
         name: "school",
+        validate : nameInput => {
+          if(nameInput){
+            return true;
+          } else {
+            console.log("please provide your INTERN  school")
+            return false;
+          }
+        }
       },
       {
         message: "would you like to add another Employee",
