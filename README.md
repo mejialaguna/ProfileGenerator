@@ -18,7 +18,7 @@
   <div align="center">
   <br/>
   
-  [![code with hearth by GITHUB_USERNAME](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-GITHUB_mejialaguna-ff1414.svg?style=flat-square)](https://github.com/mejialaguna/The-README.md-Generator.git)[![License:](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+  [![code with hearth by GITHUB_USERNAME](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-GITHUB_mejialaguna-ff1414.svg?style=flat-square)](https://github.com/mejialaguna/teamProfileGenerator.git)[![License:](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
     
   </div>
   
@@ -42,18 +42,20 @@
   ---
 
   <br/>
+
   This application is designed to add and keep track of all the employees inside of a company. 
   
   <br/>
   <br/>
+
   <details>
   <summary>Usage Screenshots and Demo</summary>
+
   <br/> 
-  img\gifVideo.webm
   
   <img src="img/pofilepic.png"/> 
   <img src="img/pic2.png"/>
-  <img src="img/gif.gif">
+  <img src="img/gifvideo.gif">
   
   </details>
   
@@ -65,11 +67,12 @@
   ---
 
   <br/>
- >* <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>
- >* <a href="https://getbootstrap.com/">CSS</a>
- >* <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API">JavaScript</a>
- >* <a href="https://nodejs.org/en/">Node</a>
- >* <a href="https://www.w3schools.com/js/js_es6.asp">ES6</a>
+
+ >*  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>
+ >*  <a href="https://getbootstrap.com/">CSS</a>
+ >*  <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API">JavaScript</a>
+ >*  <a href="https://nodejs.org/en/">Node</a>
+ >*  <a href="https://www.w3schools.com/js/js_es6.asp">ES6</a>
   
   
   <br/>
@@ -85,8 +88,8 @@
    3. Clone this <a href="https://github.com/mejialaguna/teamProfileGenerator.git">[ REPO ]</a>.
    4. Run node index inside your terminal. 
    5. Answer all the question. 
-   6. Fallow this path Develop/output/team.html , were will be the location if your newly created readme file. 
-   7. Enjoy.[ https://mejialaguna.github.io/readmeGenerator/ ]
+   6. Fallow this path Develop/output/team.html , were the new HTML file will be created . 
+   7. Enjoy.[ https://github.com/mejialaguna/teamProfileGenerator.git ]
 
   <br/>
   <br/>

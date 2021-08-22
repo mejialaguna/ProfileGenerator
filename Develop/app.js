@@ -473,11 +473,13 @@ function intern() {
 }
 
 function createMember() {
-  fs.existsSync(OUTPUT_DIR) || fs.mkdirSync(OUTPUT_DIR);
+  fs.existsSync(OUTPUT_DIR) || fs.mkdirSync(OUTPUT_DIR)
 
-  fs.writeFileSync(outputPath, render(employees), "utf-8");
-
+  fs.writeFileSync(outputPath, render(employees), "utf-8")
   console.log("created");
+  // .catch( err => {
+  //   console.log(err);
+  // })
 }
 
 createEmployee();
