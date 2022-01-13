@@ -43,7 +43,7 @@
 
   <br/>
 
-  This application is designed to add and keep track of all the employees inside of a company. 
+  Hi everyone know ,I guest this time this app is more for Human Resources type of thing, it will help add and update people profile ,like their name ,title, age , phone number , email account , github account , and more using your command line , well I guest any can use it just to have like a contact list . enjoy
   
   <br/>
   <br/>
@@ -89,7 +89,7 @@
    4. Run node index inside your terminal. 
    5. Answer all the question. 
    6. Fallow this path Develop/output/team.html , were the new HTML file will be created . 
-   7. Enjoy.[ https://github.com/mejialaguna/teamProfileGenerator.git ]
+   7. <a href="https://github.com/mejialaguna/ProfileGenerator/blob/main/img/gifvideo.gif">Enjoy the video guide. </a>
 
   <br/>
   <br/>
@@ -126,5 +126,5 @@
 
   
   
-  <a href="https://github.com/mejialaguna/teamProfileGenerator/issues/1">For any Question please click here...</a>
+  <a href="https://github.com/mejialaguna/ProfileGenerator/issues/1">For any Question please click here...</a>
   
