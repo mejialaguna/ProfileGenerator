@@ -5,7 +5,7 @@
   
   <div align="center">
   
-  <h1 align="center">Tean-Profile-Generator</h1>
+  <h1 align="center">Profile-Generator</h1>
   <br/>
   <a href="#about"><strong>Explore the screenshots »</strong></a>
   <br/>
